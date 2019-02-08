@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 //https://codility.com/programmers/lessons/3-time_complexity/perm_missing_elem/
@@ -26,6 +28,12 @@ public class Codility {
 		System.out.println(smallestPositiveMissing(new int[]{-1, 1, 3, 4}));
 		System.out.println(decimalZip(12345, 678));
 		System.out.println(findValidMaxTime(1, 2, 2, 5));
+		System.out.println(maxProfit(new int[]{23171, 21011, 21123, 21366, 21013, 21367}));
+		System.out.println(maxDoubleSliceSum(new int[]{3, 2, 6, -1, 4, 5, 1, 2})); // 2 + 6 + 4 + 5
+		//[0,  2,  8,  7, 11, 16, 17, 0]
+		//[0, 17, 15,  9, 10,  6,  1, 0]
+		
+		System.out.println(maxSliceSum(new int[]{3, 2, -6, 4, 0}));
 	}
 
 	private static int missingElement(int[] A) {
@@ -233,5 +241,55 @@ public class Codility {
 
 	private static String addCharToStringAt(char lastCharacter, String per, int i) {
 		return per.substring(0, i) + lastCharacter + per.substring(i, per.length());
+	}
+	
+	//https://app.codility.com/programmers/lessons/9-maximum_slice_problem/max_profit/
+	private static int maxProfit(int a[]) {
+		if (a.length < 1) {
+			return 0;
+		}
+		int min = a[0];
+		int maxProfit = Integer.MIN_VALUE;
+		for (int i = 1; i < a.length; i++) {
+			if (a[i] < min) {
+				min = a[i];
+			}
+			if (a[i] - min > maxProfit) {
+				maxProfit = a[i] - min;
+			}
+		}
+		return maxProfit > 0 ? 0 : maxProfit;
+	}
+	
+	private static int maxDoubleSliceSum(int A[]) {
+		int maxEndHere[] = new int[A.length];
+		int currentMaxEndHere = 0;
+		maxEndHere[0] = currentMaxEndHere;
+		for (int i = 1; i < A.length - 1; i++) {
+			currentMaxEndHere = Math.max(0, currentMaxEndHere + A[i]);
+			maxEndHere[i] = currentMaxEndHere;
+		}
+		
+		int maxBeginHere[] = new int[A.length];
+		int currentMaxBeginHere = 0;
+		for (int i = A.length - 2; i > 0; i--) {
+			currentMaxBeginHere = Math.max(0, currentMaxBeginHere + A[i]);
+			maxBeginHere[i] = currentMaxBeginHere;
+		}
+		int maxDoubleSlice = 0;
+		for (int i = 0; i < A.length - 2; i++) {
+			maxDoubleSlice = Math.max(maxDoubleSlice, maxEndHere[i] + maxBeginHere[i + 2]);
+		}
+		return maxDoubleSlice;
+	}
+	
+	private static int maxSliceSum(int A[]) {
+		int currentMax = A[0];
+		int maxSlice = currentMax;
+		for (int i = 1; i < A.length; i++) {
+			currentMax = Math.max(A[i], currentMax + A[i]);
+			maxSlice = Math.max(maxSlice, currentMax);
+		} 
+		return maxSlice;
 	}
 }

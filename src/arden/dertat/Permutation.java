@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Permutation {
-
 	public static void main(String[] args) {
 		String test = "AFBC";
 		List<String> per = permutation(test, test.length());
@@ -16,7 +15,6 @@ public class Permutation {
 		System.out.println();
 		System.out.println(per.size());
 	}
-	
 	private static List<String> permutation(String s, int len) {
 		if (len == 1) {
 			List<String> result = new ArrayList<>();
@@ -34,7 +32,6 @@ public class Permutation {
 		}
 		return result;
 	}
-	
 	private static String addCharAt(String s, char ch, int idx) {
 		return s.substring(0, idx) + ch + s.substring(idx);
 	}

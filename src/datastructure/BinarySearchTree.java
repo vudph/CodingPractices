@@ -1,8 +1,10 @@
 package datastructure;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinarySearchTree<K extends Comparable<K>, V> {
 	private Node root;
-	
 	public class Node {
 		private K key;
 		private V value;
@@ -14,39 +16,30 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 			this.value = value;
 			this.N = N;
 		}
-		
 		public K getKey() {
 			return key;
 		}
-
 		public void setKey(K key) {
 			this.key = key;
 		}
-
 		public V getValue() {
 			return value;
 		}
-
 		public void setValue(V value) {
 			this.value = value;
 		}
-
 		public Node getLeft() {
 			return left;
 		}
-
 		public void setLeft(Node left) {
 			this.left = left;
 		}
-
 		public Node getRight() {
 			return right;
 		}
-
 		public void setRight(Node right) {
 			this.right = right;
 		}
-
 		@Override
 		public String toString() {
 			return key + "[value=" + value + "]";
@@ -128,16 +121,16 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 		}
 	}
 	
-	public Node trimBST1(K min, K max) {
-		return trimBST1(root, min, max);
+	public Node trimBST(K min, K max) {
+		return trimBST(root, min, max);
 	}
 	
-	private Node trimBST1(Node node, K min, K max) {
+	private Node trimBST(Node node, K min, K max) {
 		if (node == null) {
 			return null;
 		}
-		node.left = trimBST1(node.left, min, max);
-		node.right = trimBST1(node.right, min, max);
+		node.left = trimBST(node.left, min, max);
+		node.right = trimBST(node.right, min, max);
 		int minCmp = node.key.compareTo(min);
 		int maxCmp = node.key.compareTo(max);
 		if (minCmp < 0) {
@@ -149,27 +142,6 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 		}
 	}
 	
-	public Node trimBST2(K min, K max) {
-		return trimBST2(root, min, max);
-	}
-
-	private Node trimBST2(Node node, K min, K max) {//traverse by in order (NLR)
-		if (node == null) {
-			return null;
-		}
-		int cmpMin = node.key.compareTo(min);
-		int cmpMax = node.key.compareTo(max);
-		if (cmpMin < 0) {
-			return node.right;
-		} else if (cmpMax > 0) {
-			return node.left;
-		} else {
-			node.left = trimBST2(node.left, min, max);
-			node.right = trimBST2(node.right, min, max);
-			return node;
-		}
-	}
-
 	public int height() {
 		return height(root);
 	}
@@ -225,20 +197,86 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 		}
 		return false;
 	}
+	
+	public void printLevel() {
+		Queue<Node> queue = new LinkedList<>();
+		int currLevel = 0;
+		if (root != null) {
+			queue.add(root);
+			currLevel = 1;
+		}
+		int nextLevel = 0;
+		while (!queue.isEmpty()) {
+			Node node = queue.poll();
+			currLevel--;
+			System.out.print(node + " ");
+			
+			if (node.left != null) {
+				queue.add(node.left);
+				nextLevel++;
+			} 
+			if (node.right != null) {
+				queue.add(node.right);
+				nextLevel++;
+			}
+			if (currLevel == 0) {
+				System.out.println();
+				currLevel = nextLevel;
+				nextLevel = 0;
+			}
+		}
+	}
+	
+	public int countNodesInRange(K min, K max) {
+		return countNodesInRange(root, min, max);
+	}
+
+	private int countNodesInRange(Node node, K min, K max) {
+		if (node == null) {
+			return 0;
+		}
+		if (node.key.compareTo(min) >= 0 && node.key.compareTo(max) <= 0) {
+			return 1 + countNodesInRange(node.left, min, max) + countNodesInRange(node.right, min, max);
+		} else {
+			return countNodesInRange(node.left, min, max) + countNodesInRange(node.right, min, max);
+		}
+	}
+	
+	public int countLeaves() {
+		return countLeaves(root);
+	}
+
+	private int countLeaves(BinarySearchTree<K, V>.Node node) {
+		if (node == null) {
+			return 0;
+		}
+		if (node.left == null && node.right == null) {
+			return 1;
+		}
+		return countLeaves(node.left) + countLeaves(node.right);
+	}
 
 	public static void main(String[] args) {
-		String keys[] = {"F", "G", "C", "B", "A", "D", "H", "E", "J", "I", "K"};
-		BinarySearchTree<String, Integer> bst = new BinarySearchTree<>();
+//		String keys[] = {"F", "G", "C", "B", "A", "D", "H", "E", "J", "I", "K"};
+		int keys[] = {6, 4, 9, 3, 5, 7, 10, 2, 1, 8};
+		BinarySearchTree<Integer, Integer> bst = new BinarySearchTree<>();
 		for (int i = 0; i < keys.length; i++) {
-			bst.put(keys[i], i);
+			bst.put(keys[i], keys[i]);
 		}
-		bst.printInOrder();
-		System.out.println(bst.min());
-		System.out.println(bst.height());
+//		bst.printInOrder();
+//		System.out.println(bst.min());
+//		System.out.println(bst.height());
+		bst.printLevel();
+		System.out.println("\n");
+		
+		System.out.println(bst.countNodesInRange(5, 5));
+		
+		System.out.println("count leaves: " + bst.countLeaves());
+		
 //		System.out.println(bst.isBST("?"));
 //		bst.printPostOrder();
 		System.out.println(bst.isBalance());
-		bst.trimBST1("D", "H");
+//		bst.trimBST("D", "H");
 		bst.printInOrder();
 		System.out.println(bst.isBalance());
 		

@@ -6,7 +6,6 @@ public class CombinationTwoString {
 	private static boolean isValidShuffle(String a, String b, String c) {
 		if (a.length() + b.length() != c.length()) 
 			return false;
-		
 		Stack<Character> stack = new Stack<>();
 		for (int i = c.length() - 1; i >= 0; i--) {
 			stack.push(c.charAt(i));
@@ -23,20 +22,10 @@ public class CombinationTwoString {
 				return false;
 			}
 		}
-//		for (int i = 0; i < c.length(); i++) {
-//			if (ai < a.length() && c.charAt(i) == a.charAt(ai)) {
-//				ai++;
-//			} else if (bi < b.length() && c.charAt(i) == b.charAt(bi)) {
-//				bi++;
-//			} else {
-//				return false;
-//			}
-//		}
 		return true;
 	}
 
 	public static void main(String[] args) {
-		System.out.println(isValidShuffle("AAB", "AAC", "AACAAB"));
+		System.out.println(isValidShuffle("abc", "def", "dabecf"));
 	}
-
 }

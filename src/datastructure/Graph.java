@@ -33,17 +33,17 @@ public class Graph {
 	public Iterable<Integer> adj(int v) {
 		return adj[v];
 	}
-	
+
 	public String toString() {
-        StringBuilder s = new StringBuilder();
-        s.append(V + " vertices, " + E + " edges " + "\n");
-        for (int v = 0; v < V; v++) {
-            s.append(v + ": ");
-            for (int w : adj[v]) {
-                s.append(w + " ");
-            }
-            s.append("\n");
-        }
-        return s.toString();
-    }
+		StringBuilder s = new StringBuilder();
+		s.append(V + " vertices, " + E + " edges " + "\n");
+		for (int v = 0; v < V; v++) {
+			s.append(v + ": ");
+			for (int w : adj[v]) {
+				s.append(w + " ");
+			}
+			s.append("\n");
+		}
+		return s.toString();
+	}
 }

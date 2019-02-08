@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class NextHigherSameDigits {
-
 	private static long nextHigher(long n) {
 //		int a[] = Integer.toString(n).chars().map(x -> x - '0').toArray();
 		char a[] = Long.toString(n).toCharArray();
@@ -57,12 +56,9 @@ public class NextHigherSameDigits {
 		//1. find the pivot which has its value is less than the next right element (3 < 6) -> 3 is the pivot.
 		//2. sort ascending all elements in the right of the pivot => 2, 4, 4, 6
 		//3. find the first element (4) which is greater than the pivot (3), then swap the pivot (3) with this element (4) => 1, 4, 2, 3, 4, 6
-		
 		System.out.println(nextHigher(136442));
-		
 		//previous smaller: 8123 -> pivot=8, sort [1, 2, 3] descending => [3, 2, 1] select 3 -> switch 3 & 8 => 3821
 		System.out.println(previousSmaller(43322123));
 //		43322123 => 4332 2321 => 4332 1322
 	}
-
 }

@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.Stack;
 
 public class BalancedParentheses {
-
 	private static boolean isBanlancedParentheses(String parentheses) {
 		Stack<Character> parenthesesStack = new Stack<>();
 		Set<Character> opening = new HashSet<>();
@@ -34,10 +33,8 @@ public class BalancedParentheses {
 				}
 			}
 		}
-		
 		return parenthesesStack.isEmpty();
 	}
-
 	public static void main(String[] args) {
 		String parentheses = "(2 + [1 + {2 * [1 + (1 + 3) + 4] + 1}])";
 		System.out.println(isBanlancedParentheses(parentheses));

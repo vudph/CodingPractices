@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -149,15 +150,57 @@ public class JavaArrayInterview {
 		return A;
 	}
 	
+	private static void reverseArray(int a[]) {
+		int n = a.length - 1;
+		for (int i = 0; i < a.length / 2; i++) {
+			swap(i, n--, a);
+		}
+	}
+	
+	private static void swap(int i, int j, int a[]) {
+		int tmp = a[i];
+		a[i] = a[j];
+		a[j] = tmp;
+	}
+	
+	private static <T> T[] returnArrayWithoutDuplicates(T a[], T tmp[]) {
+		Set<T> set = new LinkedHashSet<>();
+		for (int i = 0; i < a.length; i++) {
+			set.add(a[i]);
+		}
+		return set.toArray(tmp);
+	}
+	
+	private static Character firstNonRepeatedChar(String s) {
+		List<Character> nonRepeatedChars = new ArrayList<>();
+		Set<Character> repeatedChars = new HashSet<>();
+		for(int i = 0; i< s.length(); i++) {
+			if (!repeatedChars.contains(s.charAt(i))) {
+				if(!nonRepeatedChars.contains(s.charAt(i))) {
+		     		nonRepeatedChars.add(s.charAt(i));
+		  		} else {
+		  			Character ch = s.charAt(i);
+					repeatedChars.add(ch);
+					nonRepeatedChars.remove(ch);
+				}
+			}
+		}
+		return nonRepeatedChars.isEmpty() ? null : nonRepeatedChars.get(0);
+	}
 	public static void main(String[] args) {
-		findDuplicateElement(new String[]{"Java", "JSP", "Servlets", "Java", "Struts", "JSP", "JDBC"});
-		System.out.println(findSecondLargest(new int[]{47498, 14526, 74562, 42681, 75283, 45796}));
-		System.out.println(areEqualArrays(new int[]{47498, 14526, 74562, 42681, 75283, 45796}, new int[]{47498, 14526, 74562, 42681, 75283, 45795}));
+//		findDuplicateElement(new String[]{"Java", "JSP", "Servlets", "Java", "Struts", "JSP", "JDBC"});
+//		System.out.println(findSecondLargest(new int[]{47498, 14526, 74562, 42681, 75283, 45796}));
+//		System.out.println(areEqualArrays(new int[]{47498, 14526, 74562, 42681, 75283, 45796}, new int[]{47498, 14526, 74562, 42681, 75283, 45795}));
 		findPairsSumEqualNumber(new int[] {4, 6, 6, -10, 8, 2, 20}, 10);
-		findContinuousSubArraySumEqualNumber(new int[]{15, 51, 7, 81, 5, 11, 25}, 41);
-		System.out.println(findLargestContinousSum(new int[]{-10, -1, 2, -5, 10, 15, 2, -1, 10, 30}));
-		System.out.println(findMissingElement(new int[] {4, 1, 0, 3, 9, 6, 8, 5, 5, 3}, new int[] {6, 4, 5, 3, 1, 0, 8, 3, 9}));
-		rotateArrayCircularly(new int[]{}, 1);
+//		findContinuousSubArraySumEqualNumber(new int[]{15, 51, 7, 81, 5, 11, 25}, 41);
+//		System.out.println(findLargestContinousSum(new int[]{-10, -1, 2, -5, 10, 15, 2, -1, 10, 30}));
+//		System.out.println(findMissingElement(new int[] {4, 1, 0, 3, 9, 6, 8, 5, 5, 3}, new int[] {6, 4, 5, 3, 1, 0, 8, 3, 9}));
+//		rotateArrayCircularly(new int[]{}, 1);
+//		reverseArray(new int[]{4, 5, 8, 9, 10});
+//		String aa[] = returnArrayWithoutDuplicates(new String[]{"Java", "JSP", "Servlets", "Java", "Struts", "JSP", "JDBC"}, new String[0]);
+//		System.out.println();
+		
+		System.out.println(firstNonRepeatedChar("abcadcacbbe"));
 	}
 
 }

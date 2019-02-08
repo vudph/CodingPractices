@@ -99,7 +99,7 @@ public class TransformWord {
 	
 	public static void main(String[] args) {
 		String dictionary[] = new String[] {"cat", "bat", "bet", "bed", "at", "ad", "ed"};
-		String words[] = new String[] {"cat", "baat"};
+		String words[] = new String[] {"cat", "bed"};
 		String shortestStep[] = transformWord(dictionary, words);
 		if (shortestStep != null) {
 			for (String st : shortestStep) {

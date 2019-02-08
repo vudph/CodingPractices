@@ -5,12 +5,10 @@ import java.util.Map;
 
 //Find the first non-repeated (unique) character in a given string.
 public class FirstUniqueChar {
-
 	public static void main(String[] args) {
 		String test = "ongu PHam HoangV VuPm";
 		System.out.println(getFirstUniqueChar(test));
 	}
-
 	private static Character getFirstUniqueChar(String test) {
 		Map<Character, Integer> characterMap = new HashMap<>();
 		for (int i = 0; i < test.length(); i++) {
@@ -27,5 +25,4 @@ public class FirstUniqueChar {
 		}
 		return null;
 	}
-
 }

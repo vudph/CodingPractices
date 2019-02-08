@@ -74,6 +74,11 @@ public class QueueWithIterator<T> implements Iterable<T> {
 		for (Integer integer : queue) {
 			System.out.print(integer + " ");
 		}
+		System.out.println();
+		Iterator<Integer> iter = queue.iterator();
+		while (iter.hasNext()) {
+			System.out.print(iter.next() + " ");
+		}
 	}
 
 }

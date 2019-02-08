@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AnagramStrings {
-
 	public static void main(String[] args) {
 		String s1 = "Eleven pluss two";
 		String s2 = "Twelve plus one";
@@ -15,9 +14,9 @@ public class AnagramStrings {
 	private static boolean isAnagramStrings(String s1, String s2) {
 		char[] ch1 = s1.toLowerCase().toCharArray();
 		char[] ch2 = s2.toLowerCase().toCharArray();
-//		if (ch1.length != ch2.length) {
-//			return false;
-//		}
+		if (ch1.length != ch2.length) {
+			return false;
+		}
 		Map<Character, Integer> charMap = new HashMap<>();
 		for (int i = 0; i < ch1.length; i++) {
 			if (ch1[i] >= 97 && ch1[i] <= 122) {
@@ -44,5 +43,4 @@ public class AnagramStrings {
 		}
 		return charMap.isEmpty();
 	}
-
 }

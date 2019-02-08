@@ -10,7 +10,6 @@ public class MedianElement {
 	private static double medianElement(int input[]) {
 		PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
 		PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-		
 		for (int i = 0; i < input.length; i++) {
 			if (i % 2 == 0) {
 				maxHeap.add(input[i]);
@@ -28,9 +27,8 @@ public class MedianElement {
 		}
 		return input.length % 2 != 0 ? maxHeap.peek() : (maxHeap.peek() + minHeap.peek()) / 2.0;
 	}
-	
 	public static void main(String[] args) {
-		int a[] = new int[] {-50, 50, 10};
+		int a[] = new int[] {1, 3, 2};
 		System.out.println(medianElement(a));
 	}
 }
